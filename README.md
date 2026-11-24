@@ -6,6 +6,39 @@ Página de venda de um desktop com RTX 3080 AFOX 10 GB, i5-13400F e 16 GB de mem
 
 Extraia o ZIP inteiro e abra `index.html` no navegador. Mantenha `styles.css`, `app.js` e a pasta `assets/` no mesmo local. A página é estática e não exige instalação nem compilação.
 
+## Executar com Docker
+
+Com o Docker e o Docker Compose instalados e o Docker em execução, abra um terminal na pasta do projeto e execute:
+
+```sh
+docker compose up --build -d
+```
+
+Acesse [http://localhost:8080](http://localhost:8080). O contêiner usa Nginx para servir os arquivos estáticos. Se a porta 8080 estiver ocupada, altere o primeiro número em `8080:80` no arquivo `compose.yaml`.
+
+Após editar os arquivos do site, execute novamente o comando acima para reconstruir a imagem e atualizar o contêiner.
+
+Para consultar os logs:
+
+```sh
+docker compose logs -f
+```
+
+Para parar e remover o contêiner:
+
+```sh
+docker compose down
+```
+
+Também é possível executar sem o Compose:
+
+```sh
+docker build -t pc-gamer-parauapebas .
+docker run --rm -d --name pc-gamer-parauapebas -p 8080:80 pc-gamer-parauapebas
+```
+
+Nesse caso, pare o contêiner com `docker stop pc-gamer-parauapebas`.
+
 ## Publicar no GitHub Pages
 
 1. Envie os arquivos extraídos para a raiz de um repositório no GitHub. O arquivo `index.html` deve aparecer na primeira tela do repositório.
